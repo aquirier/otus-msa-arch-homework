@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-test-webapi-deployment
+  namespace: homework
+  labels:
+    app: otw-dp
+spec:
+  replicas: 3
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      otw: v1
+  template:
+    metadata:
+      labels:
+        otw: v1
+    spec:
+      containers:
+      - name: otus-test-webapi
+        image: aquirier/otus-test-webapi
+        ports:
+        - containerPort: 8000
+        
