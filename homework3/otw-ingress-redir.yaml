@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: otus-test-webapi-ingress-redir
+  namespace: homework
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: otus-test-webapi.arch.homework
+      http:
+        paths:
+          - path: /otus/aleksey(?:/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: otus-test-webapi-service
+                port:
+                  number: 80
