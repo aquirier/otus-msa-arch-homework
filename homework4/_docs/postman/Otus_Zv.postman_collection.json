@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "adfebba1-cc52-417b-9704-5913705a30cb",
+		"name": "Otus_Zv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4134478"
+	},
+	"item": [
+		{
+			"name": "Otus_Zv_Auth",
+			"item": [
+				{
+					"name": "1_RegisterNewUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"scroodge.mcduck@gmail.com\",\r\n  \"userName\": \"scroodge.mcduck\",\r\n  \"password\": \"pass\",\r\n  \"displayName\": \"Scroodge McDuck\",\r\n  \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zakusvill_auth_base_uri}}/api/v1/registration/register",
+							"host": [
+								"{{zakusvill_auth_base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"registration",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2_Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"scroodge.mcduck@gmail.com\",\r\n  \"password\": \"pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zakusvill_auth_base_uri}}/api/v1/auth/login",
+							"host": [
+								"{{zakusvill_auth_base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3_IsAuthorized",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{zakusvill_auth_bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zakusvill_auth_base_uri}}/api/v1/auth/isAuthorized",
+							"host": [
+								"{{zakusvill_auth_base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"isAuthorized"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4_GetProfile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{zakusvill_auth_bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zakusvill_auth_base_uri}}/api/v1/profile/get",
+							"host": [
+								"{{zakusvill_auth_base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5_UpdateProfile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{zakusvill_auth_bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"Uncle Scroodge\",\r\n  \"gender\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zakusvill_auth_base_uri}}/api/v1/profile/update",
+							"host": [
+								"{{zakusvill_auth_base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6_DeleteProfile",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{zakusvill_auth_bearer_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{zakusvill_auth_base_uri}}/api/v1/profile/delete",
+							"host": [
+								"{{zakusvill_auth_base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

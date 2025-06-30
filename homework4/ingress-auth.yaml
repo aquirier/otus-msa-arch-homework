@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: otus-zv-auth-ingress
+  namespace: homework
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: otus.zv.auth.arch.homework
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: otus-zv-auth-service
+                port:
+                  number: 80

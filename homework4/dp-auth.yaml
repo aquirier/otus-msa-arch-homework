@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-zv-depl-auth
+  namespace: homework
+  labels:
+    app: zv-dp-auth
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      zv-dp-auth: v1
+  template:
+    metadata:
+      labels:
+        zv-dp-auth: v1
+    spec:
+      containers:
+      - name: otus-zv-auth-webapi
+        image: aquirier/otus-zv-auth:homework
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: otus-zv-configmap-common
+              key: environmentName
+        - name: PRINT_CONFIG
+          valueFrom:
+            configMapKeyRef:
+              name: otus-zv-configmap-common
+              key: printConfig
+        - name: TRACING_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: otus-zv-configmap-common
+              key: tracingEnabled
+        - name: TRACING_TENANT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: otus-zv-configmap-common
+              key: tracingTenantId
+        - name: TRACING_COLLECTOR_BASEURL
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-common
+              key: tracingCollectorBaseUrl
+        - name: AUTH_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-auth
+              key: authSecretKey
+        - name: SWAGGER_USE
+          valueFrom:
+            configMapKeyRef:
+              name: otus-zv-configmap-common
+              key: swaggerUse
+        - name: POSTGRESQL_HOST
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-common
+              key: postgresqlHost
+        - name: POSTGRESQL_HOST_MASTER_PORT
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-common
+              key: postgresqlHostMasterPort
+        - name: POSTGRESQL_DBNAME
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-common
+              key: postgresqlDbName
+        - name: POSTGRESQL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-auth
+              key: authPostgresqlUserName
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-auth
+              key: authPostgresqlPassword
+        - name: POSTGRESQL_OPTIONS
+          valueFrom:
+            secretKeyRef:
+              name: otus-zv-secrets-common
+              key: postgresqlOptions
+        

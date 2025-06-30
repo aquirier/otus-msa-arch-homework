@@ -1,0 +1,8 @@
+auth:
+  existingSecret: secrets-infra-all
+  secretKeys:
+    adminPasswordKey: postgresSuperUserPassword
+    userPasswordKey: postgresCustomUserPassword
+    replicationPasswordKey: postgresReplicationUserPassword
+image:
+  tag: 17.5.0-debian-12-r12

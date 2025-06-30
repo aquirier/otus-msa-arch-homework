@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otus-zv-configmap-common
+  namespace: homework
+data:
+  environmentName: template
+  printConfig: "true"
+  tracingEnabled: "true"
+  tracingTenantId: Local
+  swaggerUse: "true"
